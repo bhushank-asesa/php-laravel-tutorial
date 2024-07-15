@@ -120,3 +120,9 @@ Route::get('api-home', function (Request $request) {
 ```
 
 - http://localhost:5000/api/api-home
+
+8. Redirect to route
+
+```bash
+return redirect("session/view");
+```

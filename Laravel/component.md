@@ -1,6 +1,6 @@
 # Component
 
-## create component using command
+## Create component using command
 
 ```bash
 php artisan make:component Alert
@@ -88,15 +88,15 @@ $message="php variabled message";
 </div>
 ```
 
-- usage
+- Usage
 
 ```bash
-<x-alert type="danger" message="Danger message" id="dager-alert" class="m-2" />
+<x-alert type="danger" message="Danger message" id="danger-alert" class="m-2" />
 ```
 
 2. Merged Attribute only class
 
-- component
+- Component
 
 ```bash
 <div  {{ $attributes->merge(['class'=>'alert alert-'.$validType]) }}  role="alert">
@@ -110,15 +110,12 @@ $message="php variabled message";
 <div  {{ $attributes->merge(['class'=>'alert alert-'.$validType,'role'=>$attributes->prepends("flash")]) }}  >
     {{ $message }}
 </div>
-
-
 ```
 
-- usage
+- Usage
 
 ```bash
 <x-alert type="danger" message="Danger message" id="danger-alert" class="m-2" role="alert" />
-
 ```
 
 3. Conditional class
@@ -172,7 +169,7 @@ $message="php variabled message";
 __construct($type, $message = "", public $dismissible = false)
 ```
 
-## slot variable
+## Slot variable
 
 ```bash
 <div  {{ $attributes->class(['alert-dismissible fade show'=>$dismissible])->merge(['class'=>'alert alert-'.$validType,'role'=>$attributes->prepends("flash")]) }}  >
@@ -199,7 +196,7 @@ __construct($type, $message = "", public $dismissible = false)
 </x-alert>
 ```
 
-## html link in component
+## HTML link in component
 
 - In `app\View\Components\Alert.php`
 
@@ -239,4 +236,33 @@ public function link($text, $target)
 </x-alert>
 ```
 
-## anonymous components
+## Anonymous components
+
+- Manually created view `resources\views\components\card.blade.php`
+
+```bash
+@props([
+    "title"=>"card title",
+    "text"=>"Some quick example text to build on the card title and make up the bulk of the card's content.",
+    "button"=>"Go somewhere",
+    "image" => ""
+])
+
+<div class="card" style="width: 18rem;">
+    <img src="{{$image}}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{$title}}</h5>
+      <p class="card-text">{{$text}}</p>
+      <a href="#" class="btn btn-primary">{{$button}}</a>
+    </div>
+</div>
+```
+
+- Usage
+
+```bash
+@php
+    $component = "card"
+@endphp
+<x-dynamic-component :component="$component" title="dynamic anonymous component" text="did not used component class" image="https://www.loksatta.com/wp-content/uploads/2024/07/New-Project-19-4.jpg?resize=310,174" />
+```

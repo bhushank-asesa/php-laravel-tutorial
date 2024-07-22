@@ -56,11 +56,62 @@ $mysql1Posts = DB::connection("mysql")->table("posts")->get();
 composer require mongodb/laravel-mongodb
 ```
 
-###
+### Mongo DB for php
 
 1.  Download Mongo DB from
     [Github](https://github.com/mongodb/mongo-php-driver/releases)
     `php_mongodb-1.19.3-8.2-ts-x64.zip`
 
 2.  In `E:\xampp\php\php.ini` add extension `extension=php_mongodb.dll`
-- php_mongodb is file name in above zip
+
+- copy php_mongodb.pdb and php_mongodb.dll in `E:\xampp\php\ext`
+- php_mongodb.dll is file name in above zip
+- check in phpmyinfo
+
+3. Mongo DB in Laravel
+
+- `config\database.php`
+
+```bash
+'mongodb' => [
+    'driver' => 'mongodb',
+    'dsn' => env('DB_URI', 'mongodb://localhost:27017'),
+    'database' => 'marketplace',
+],
+```
+
+4. create model store
+
+```bash
+php artisan make:model Store
+```
+
+5. CRUD
+
+```bash
+Route::post("create", function (Request $request) {
+    $store = new Store();
+    $store->name = $request->name;
+    $store->description = $request->description;
+    $store->owner = $request->owner;
+    $store->save();
+    return response()->json($store->id);
+});
+Route::get("/delete/{id}", function ($id) {
+    $store = Store::find($id);
+    print_r($store->delete());
+});
+Route::post("/edit/{id}", function (Request $request, $id) {
+    $store = Store::find($id);
+    $store->description = $request->description;
+    print_r($store->save());
+});
+Route::get("/get/{id}", function (Request $request, $id) {
+    $store = Store::find($id);
+    print_r($store->toArray());
+});
+Route::get("/list", function () {
+    $store = Store::get();
+    return response()->json($store->toArray());
+});
+```

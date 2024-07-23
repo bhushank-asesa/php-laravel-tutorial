@@ -115,3 +115,23 @@ Route::get("/list", function () {
     return response()->json($store->toArray());
 });
 ```
+
+## Env variable
+
+1. .env file
+
+```bash
+CUSTOM_NAME="New Custom Name"
+```
+
+2. in `config\app.php`
+
+```bash
+'custom_name' => env('CUSTOM_NAME',"default_name"),
+```
+
+3. Usage
+
+```bash
+$custom_name = config("app.custom_name");
+```

@@ -125,3 +125,12 @@ try {
     Log::info('log Error : ' . $e->getMessage() . " @" . $e->getLine() . " \nin " . $e->getFile());
 }
 ```
+
+## Some extra model function
+
+```bash
+$res['maxPostViews'] = Post::max("counter");
+$res['minPostViews'] = Post::min("counter");
+$res['sumPostViews'] = Post::sum("counter");
+$res['avgPostViews'] = Post::avg("counter");
+```

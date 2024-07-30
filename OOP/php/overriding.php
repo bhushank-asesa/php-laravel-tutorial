@@ -1,6 +1,6 @@
 <?php
 // Inherited methods can be overridden by redefining the methods (use the same name) in the child class.
-
+// PHP does not support method overloading
 
 class Fruit
 {

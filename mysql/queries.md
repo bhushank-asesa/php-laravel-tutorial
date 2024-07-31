@@ -167,3 +167,9 @@ delete from users_2
 update users set email = 'bhushan1@gmail.com' where id = 1
 update users set email = 'bhushan1@gmail.com'
 ```
+
+## Rank Query
+
+```bash
+SELECT *, RANK() OVER (order by gold desc, silver desc, bronze desc) AS rank FROM `medal` order by gold desc, silver desc, bronze desc;
+```

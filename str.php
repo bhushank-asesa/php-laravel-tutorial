@@ -33,8 +33,30 @@ echo "\n" . substr($x, $end); // World!
 echo "\n" . substr($x, $end, $endLen); // Worl
 // \n is escape character
 */
+// heredoc
+$x = 5;
+$y = 10;
+$text = <<<TEXT
+Line 1 $x
+Line 2 $y
+TEXT;
 
+echo $text;
+/* output 
+Line 1 5
+Line 2 10
+*/
 
+$text2 = <<<'TEXT'
+Line 1 $x
+Line 2 $y
+TEXT;
+echo "\n";
+echo $text2;
+/* output 
+Line 1 $x
+Line 2 $y
+*/
 
 
 

@@ -1,5 +1,5 @@
 <?php
-
+const NameFirst = "Name first";
 // define(name, value); // 
 define("name", "Bhushan"); // default true
 define("fnm", "Bhushan"); // php 8 accepts only false 
@@ -7,6 +7,9 @@ echo "\n" . name;
 echo "\n" . fnm;
 const lnm = "kumbhar";
 echo "\n" . lnm;
+echo "\n" . NameFirst;
+echo defined("name") ? " Yes" : "No";
+echo defined("name2") ? " Yes " : "No";
 // magic constants
 echo "\n __DIR__ " . __DIR__ . "\n"; //	The directory of the file.	 // C:\xampp\htdocs\php-basic  
 echo "__FILE__ " . __FILE__ . "\n"; //	The file name including the full path. // C:\xampp\htdocs\php-basic\const.php	
@@ -47,3 +50,6 @@ trait Trait_a
         echo "__TRAIT__ " . __TRAIT__ . "\n"; //	If used inside a trait, the trait name is returned.	
     }
 }
+
+
+// echo name2;

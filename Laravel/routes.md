@@ -126,3 +126,34 @@ Route::get('api-home', function (Request $request) {
 ```bash
 return redirect("session/view");
 ```
+
+9. Custom 404 Page
+
+- View `resources\views\errors\404.blade.php`
+
+```bash
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>page not found {{ $error_message }}</h1>
+</body>
+
+</html>
+```
+
+- In `routes\web.php`
+
+```bash
+Route::fallback(function () {
+    $errorMessage = 'Oops! Something went wrong.';
+    return response()->view('errors.404', ['error_message' => $errorMessage], 404);
+});
+```

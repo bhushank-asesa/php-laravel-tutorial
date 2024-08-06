@@ -157,3 +157,12 @@ Route::fallback(function () {
     return response()->view('errors.404', ['error_message' => $errorMessage], 404);
 });
 ```
+
+9. Routes with controller group
+
+```php
+Route::controller(YourController::class)->group(function () {
+    Route::get('route-1', 'method1')->name('your-controller-method-route-1');
+    Route::post('route-2', 'method2')->name('your-controller-method-route-2');
+});
+```

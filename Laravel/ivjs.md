@@ -2,7 +2,7 @@
 
 ## In file `resources\views\iv-js.blade.php`
 
-```bash
+```php
 @extends('layouts.bs5')
 @section('main-section')
     @php
@@ -34,7 +34,7 @@
 
 ## In Layout `resources\views\layouts\bs5.blade.php`
 
-```bash
+```php
 <!doctype html>
 <html lang="en">
 

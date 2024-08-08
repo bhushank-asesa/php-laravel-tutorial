@@ -10,7 +10,7 @@ php artisan make:middleware IsAuthTokenAvailable
 
 ## Modify middleware that authToken presents in headers or not in handle function
 
-```bash
+```php
 public function handle(Request $request, Closure $next): Response
 {
     if ($request->hasHeader('authToken')) {
@@ -27,7 +27,7 @@ public function handle(Request $request, Closure $next): Response
 
 1. Laravel 11 => file `bootstrap\app.php` for all routes
 
-```bash
+```php
 ->withMiddleware(function (Middleware $middleware) {
     // $middleware->append(IsAuthTokenAvailable::class); // for all routes
 })
@@ -35,7 +35,7 @@ public function handle(Request $request, Closure $next): Response
 
 2. In routes\api.php for specific routes
 
-```bash
+```php
 Route::group(['middleware' => IsAuthTokenAvailable::class], function () {
     Route::get('/auth-4', function () {
         echo "auth 4";
@@ -66,7 +66,7 @@ Route::get('/auth-6', function () {
 
 3. In Laravel 10 in kernel file `app\Http\Kernel.php`
 
-```bash
+```php
 protected $middlewareAliases = [
     'project.auth' => \App\Http\Middleware\IsAuthTokenAvailable::class,
 ];
@@ -74,7 +74,7 @@ protected $middlewareAliases = [
 
 - project.auth is alies
 
-```bash
+```php
   Route::group(['middleware' => ['project.auth']], function () {
 
   });

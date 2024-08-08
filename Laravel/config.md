@@ -17,7 +17,7 @@ DB_PASSWORD=
 
 2. In `config\database.php` add another mysql_2 database connection
 
-```bash
+```php
 'mysql_2' => [
     'driver' => 'mysql',
     'url' => env('DB_URL'),
@@ -43,7 +43,7 @@ DB_PASSWORD=
 
 - Usage
 
-```bash
+```php
 $mysql2Posts = DB::connection("mysql_2")->table("posts")->get();
 $mysql1Posts = DB::connection("mysql")->table("posts")->get();
 ```
@@ -72,7 +72,7 @@ composer require mongodb/laravel-mongodb
 
 - `config\database.php`
 
-```bash
+```php
 'mongodb' => [
     'driver' => 'mongodb',
     'dsn' => env('DB_URI', 'mongodb://localhost:27017'),
@@ -88,7 +88,7 @@ php artisan make:model Store
 
 5. CRUD
 
-```bash
+```php
 Route::post("create", function (Request $request) {
     $store = new Store();
     $store->name = $request->name;
@@ -126,12 +126,12 @@ CUSTOM_NAME="New Custom Name"
 
 2. in `config\app.php`
 
-```bash
+```php
 'custom_name' => env('CUSTOM_NAME',"default_name"),
 ```
 
 3. Usage
 
-```bash
+```php
 $custom_name = config("app.custom_name");
 ```

@@ -8,13 +8,13 @@ php artisan make:observer PostObserver --model=Post
 
 ## Add observer in `app\Providers\AppServiceProvider.php` in boot method
 
-```bash
+```php
  Post::observe(PostObserver::class);
 ```
 
 ## Add action in your event `app\Observers\PostObserver.php`
 
-```bash
+```php
 public function saving(Post $post): void
 {
     $post->slug = Str::slug($post->title, "-");
@@ -27,7 +27,7 @@ public function retrieved(Post $post): void
 
 ## Usage
 
-```bash
+```php
 $post = new Post();
 $post->title = $request->title;
 $post->user_id = "5";
@@ -37,4 +37,5 @@ $post->save();
 // $post->saveQuietly(); // ignore observer event
 // other Quietly methods available eg. deleteQuietly
 ```
+
 ## Observer and model event work on single object

@@ -4,14 +4,14 @@
 
 1. add foreign key in user_profile
 
-```bash
+```php
 $table->unsignedBigInteger('primary_user_id');
 $table->foreign('primary_user_id')->references('id')->on('primary_users')->onDelete('cascade');
 ```
 
 2. in `app\Models\Public\PrimaryUser.php`
 
-```bash
+```php
 public function profile()
 {
     return $this->hasOne(UserProfile::class);
@@ -20,7 +20,7 @@ public function profile()
 
 3. use in controller or route function
 
-```bash
+```php
 $primary_user = PrimaryUser::with('profile')->get();
 if ($primary_user->isNotEmpty())
     print_r($primary_user->toArray());
@@ -32,14 +32,14 @@ else
 
 1. add foreign key in users
 
-```bash
+```php
 $table->unsignedBigInteger("role_id");
 $table->foreign("role_id")->references("id")->on("roles");
 ```
 
 2. in `app\Models\Public\PrimaryUser.php`
 
-```bash
+```php
 public function role()
 {
     return $this->belongsTo(Role::class)->select(['name', 'key', 'description']);
@@ -48,7 +48,7 @@ public function role()
 
 3. use in controller or route function
 
-```bash
+```php
 $primary_user = PrimaryUser::where("id", "5")->first();
 if ($primary_user)
     print_r($primary_user->role->toArray());
@@ -60,7 +60,7 @@ else
 
 1. in Role
 
-```bash
+```php
 public function primaryUsers()
 {
     return $this->hasMany(PrimaryUser::class);
@@ -69,14 +69,14 @@ public function primaryUsers()
 
 2. add foreign key in users
 
-```bash
+```php
 $table->unsignedBigInteger("role_id");
 $table->foreign("role_id")->references("id")->on("roles");
 ```
 
 3. Usage
 
-```bash
+```php
 $primary_roles = Role::with('primaryUsers')->get();
 echo "<pre>";
 if ($primary_roles->isNotEmpty())

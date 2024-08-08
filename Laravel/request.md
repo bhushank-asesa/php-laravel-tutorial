@@ -13,7 +13,7 @@ php artisan make:request Public/RegisterRequest
 1. check `Laravel\files\RegisterRequest.php`
 2. add it in any post api routes and run it
 
-```bash
+```php
 
 Route::post('register', function (RegisterRequest $request) {
     echo "This is register route and validation completes";
@@ -22,7 +22,7 @@ Route::post('register', function (RegisterRequest $request) {
 
 3. Validation failed response
 
-```bash
+```php
 {
   "message": "Validation failed",
   "data": {

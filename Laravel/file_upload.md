@@ -4,7 +4,7 @@
 
 1. To upload file in public folder, add element in disks array
 
-```bash
+```php
 'public_uploads' => [
     'driver' => 'local',
     'root' => public_path(),
@@ -13,7 +13,7 @@
 
 2.  To upload file in private folder, add element in disks array
 
-```bash
+```php
 array 'private' => [
     'driver' => 'local',
     'root' => storage_path('app/private'),
@@ -22,7 +22,7 @@ array 'private' => [
 
 3. To upload file in storage public file, add element in disks array
 
-```bash
+```php
 'public' => [
     'driver' => 'local',
     'root' => storage_path('app/public'),
@@ -34,7 +34,7 @@ array 'private' => [
 
 ## In file `routes\web.php`
 
-```bash
+```php
 Route::get('get-file-content/{path}', function ($path) {
     $fileContent = Storage::disk('private')->get($path);
     $fileMimeType = Storage::disk('private')->mimeType($path);
@@ -45,7 +45,7 @@ Route::get('get-file-content/{path}', function ($path) {
 
 ## Change in `app\Providers\AppServiceProvider.php`
 
-```bash
+```php
 public function boot(): void
 {
     Storage::disk('local')->buildTemporaryUrlsUsing(function ($path, $expiration, $options) {
@@ -60,7 +60,7 @@ public function boot(): void
 
 ## link storage to public
 
-```bash
+```php
 php artisan storage:link
 ```
 
@@ -70,7 +70,7 @@ php artisan storage:link
 
 - Get temporary URL
 
-```bash
+```php
 function getFileTemporaryURL($path, $minutes = null)
 {
 
@@ -93,7 +93,7 @@ function getFileTemporaryURL($path, $minutes = null)
 
 - Create Directory
 
-```bash
+```php
 function createDirectory($path)
 {
     $permissions = 0755;
@@ -105,7 +105,7 @@ function createDirectory($path)
 
 - Upload File
 
-```bash
+```php
 function uploadFile($file, $fileName, $disk)
 {
     $fileName = $fileName . "." . $file->extension();
@@ -118,7 +118,7 @@ function uploadFile($file, $fileName, $disk)
 
 - File attributes and upload file
 
-```bash
+```php
 if ($request->hasFile("single_file")) {
     $file = $request->file("single_file");
     $response['baseName'] = $file->getBasename();

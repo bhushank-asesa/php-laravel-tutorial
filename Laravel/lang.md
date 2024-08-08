@@ -12,7 +12,7 @@ php artisan lang:publish
 
 - :name is dynamic variable
 
-```bash
+```php
 <?php
 return [
     'welcome' => 'आपले स्वागत आहे :name',
@@ -21,7 +21,7 @@ return [
 
 3. Create Middleware
 
-```bash
+```php
 public function handle(Request $request, Closure $next): Response
 {
     if ($request->session()->get("lang"))
@@ -34,7 +34,7 @@ public function handle(Request $request, Closure $next): Response
 
 - view
 
-```bash
+```php
 <a href="/setting/en">English</a><br/>
 <a href="/setting/mr">Marathi</a><br/>
 <a href="/setting/hi">Hindi</a><br/>
@@ -44,7 +44,7 @@ public function handle(Request $request, Closure $next): Response
 
 5. routes
 
-```bash
+```php
 Route::middleware("SetLang")->group(function () {
     Route::view("home/welcome", 'home.welcome');
     Route::get("setting/{lang}", function ($lang) {
@@ -61,7 +61,7 @@ Route::view("home/welcome2", 'home.welcome');
 
 6. in `bootstrap\app.php`
 
-```bash
+```php
 ->withMiddleware(function (Middleware $middleware) {
     $middleware->appendToGroup("SetLang", SetLang::class);
 })

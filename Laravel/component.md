@@ -8,7 +8,7 @@ php artisan make:component Alert
 
 ## Component class file `app\View\Components\Alert.php`
 
-```bash
+```php
 <?php
 
 namespace App\View\Components;
@@ -47,7 +47,7 @@ class Alert extends Component
 
 1.
 
-```bash
+```php
 <div class="alert alert-{{ $type }}">
     {{ $message }}
 </div>
@@ -55,7 +55,7 @@ class Alert extends Component
 
 2.
 
-```bash
+```php
 <div class="alert alert-{{ $validType }}">
     {{ $message }}
 </div>
@@ -63,13 +63,13 @@ class Alert extends Component
 
 ## Usage in `resources\views\custom\welcome-2.blade.php`
 
-```bash
+```php
 <x-alert type="success" message="Operation successful!" />
 ```
 
 1. Use php variable
 
-```bash
+```php
 @php
 $message="php variabled message";
 @endphp
@@ -82,7 +82,7 @@ $message="php variabled message";
 
 - component
 
-```bash
+```php
 <div class="alert alert-{{ $validType }}" {{ $attributes }}>
     {{ $message }}
 </div>
@@ -90,7 +90,7 @@ $message="php variabled message";
 
 - Usage
 
-```bash
+```php
 <x-alert type="danger" message="Danger message" id="danger-alert" class="m-2" />
 ```
 
@@ -98,7 +98,7 @@ $message="php variabled message";
 
 - Component
 
-```bash
+```php
 <div  {{ $attributes->merge(['class'=>'alert alert-'.$validType]) }}  role="alert">
     {{ $message }}
 </div>
@@ -114,7 +114,7 @@ $message="php variabled message";
 
 - Usage
 
-```bash
+```php
 <x-alert type="danger" message="Danger message" id="danger-alert" class="m-2" role="alert" />
 ```
 
@@ -122,7 +122,7 @@ $message="php variabled message";
 
 - Component view
 
-```bash
+```php
 <div  {{ $attributes->class(['alert-dismissible fade show'=>$dismissible])->merge(['class'=>'alert alert-'.$validType,'role'=>$attributes->prepends("flash")]) }}  >
     {{ $message }}
     @if($dismissible)
@@ -133,7 +133,7 @@ $message="php variabled message";
 
 - Usage
 
-```bash
+```php
 <x-alert type="danger" dismissible message="Danger message" id="danger-alert" class="m-2" role="alert" />
 ```
 
@@ -141,7 +141,7 @@ $message="php variabled message";
 
 1. Component view
 
-```bash
+```php
 <div  {{ $attributes->class(['alert-dismissible fade show'=>$dismissible])->merge(['class'=>'alert alert-'.$validType,'role'=>$attributes->prepends("flash")]) }}  >
     {{ $message }}
     @isset($slot)
@@ -155,7 +155,7 @@ $message="php variabled message";
 
 2. Usage
 
-```bash
+```php
 <x-alert type="danger" dismissible id="danger-alert" class="m-2" role="alert" >
     <h2> This is slot example</h2>
     <hr/>
@@ -165,13 +165,13 @@ $message="php variabled message";
 
 3. Class
 
-```bash
+```php
 __construct($type, $message = "", public $dismissible = false)
 ```
 
 ## Slot variable
 
-```bash
+```php
 <div  {{ $attributes->class(['alert-dismissible fade show'=>$dismissible])->merge(['class'=>'alert alert-'.$validType,'role'=>$attributes->prepends("flash")]) }}  >
     {{ $message }}
     @isset($slot)
@@ -186,7 +186,7 @@ __construct($type, $message = "", public $dismissible = false)
 </div>
 ```
 
-```bash
+```php
 <x-alert type="danger" dismissible id="danger-alert" class="m-2" role="alert" >
     {{-- <x-slot:note>Developed by Bhushan</x-slot:note> --}}
     <x-slot name="note">Developed by Bhushan</x-slot>
@@ -200,7 +200,7 @@ __construct($type, $message = "", public $dismissible = false)
 
 - In `app\View\Components\Alert.php`
 
-```bash
+```php
 public function link($text, $target)
 {
     return new HtmlString("<a href='$target' class='text-link'>$text</a>");
@@ -209,7 +209,7 @@ public function link($text, $target)
 
 - Component view
 
-```bash
+```php
 <div  {{ $attributes->class(['alert-dismissible fade show'=>$dismissible])->merge(['class'=>'alert alert-'.$validType,'role'=>$attributes->prepends("flash")]) }}  >
     {{ $message }}
     @if($slot->isNotEmpty())
@@ -226,7 +226,7 @@ public function link($text, $target)
 
 - Usage
 
-```bash
+```php
 <x-alert type="danger" dismissible id="danger-alert" class="m-2" role="alert" >
     {{-- <x-slot:note>Developed by Bhushan</x-slot:note> --}}
     <x-slot name="note">Developed by Bhushan</x-slot>
@@ -240,7 +240,7 @@ public function link($text, $target)
 
 - Manually created view `resources\views\components\card.blade.php`
 
-```bash
+```php
 @props([
     "title"=>"card title",
     "text"=>"Some quick example text to build on the card title and make up the bulk of the card's content.",
@@ -260,7 +260,7 @@ public function link($text, $target)
 
 - Usage
 
-```bash
+```php
 @php
     $component = "card"
 @endphp

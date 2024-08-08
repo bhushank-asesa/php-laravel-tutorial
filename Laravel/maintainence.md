@@ -8,7 +8,7 @@
 
 2. In view `resources\views\errors\503.blade.php`
 
-```bash
+```php
 <!DOCTYPE html>
 <html lang="en">
 <head>

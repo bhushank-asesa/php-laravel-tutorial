@@ -2,7 +2,7 @@
 
 ## routes
 
-```bash
+```php
 use Illuminate\Http\Request;
 Route::view("user-form", "user-form");
 Route::post("submit-form",function(Request $request){});
@@ -10,7 +10,7 @@ Route::post("submit-form",function(Request $request){});
 
 ## View
 
-```bash
+```php
 <form action="submit-form" method="POST">
 @csrf
 @if ($errors->any())
@@ -34,7 +34,7 @@ Route::post("submit-form",function(Request $request){});
 
 ## action code
 
-```bash
+```php
 $request->validate([
     "name" => "required|min:3|max:255",
     "email" => "required|email|max:255",
@@ -52,13 +52,13 @@ return $request;
 
 ## Custom Rule
 
-```bash
+```php
 php artisan make:rule Ucfirst
 ```
 
 1. In file `app\Rules\Ucfirst.php`
 
-```bash
+```php
 <?php
 namespace App\Rules;
 use Closure;
@@ -76,7 +76,7 @@ class Ucfirst implements ValidationRule
 
 2. Usage
 
-```bash
+```php
 use App\Rules\Ucfirst;
 $request->validate(["name" => ['required', 'min:3', 'max:255', new Ucfirst]);
 ```

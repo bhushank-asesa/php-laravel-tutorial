@@ -12,7 +12,7 @@ php artisan make:controller AddressController --resource
 
 ## routes
 
-```bash
+```php
 Route::get("/countries", [PublicController::class, 'getCountries']);
 Route::resource('address', AddressController::class);
 ```

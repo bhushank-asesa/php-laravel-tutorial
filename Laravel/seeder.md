@@ -8,7 +8,7 @@ php artisan make:seeder RoleSeeder
 
 ## Add code to run method of RoleSeeder
 
-```bash
+```php
 public function run(): void
 {
     DB::statement('SET FOREIGN_KEY_CHECKS=0;');
@@ -32,6 +32,6 @@ php artisan db:seed --class=RoleSeeder
 
 ## add seeder to database seeder in database\seeders\DatabaseSeeder.php run method
 
-```bash
+```php
  $this->call(RoleSeeder::class);
 ```

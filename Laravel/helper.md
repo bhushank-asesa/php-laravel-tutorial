@@ -3,7 +3,7 @@
 1. create `app/Helpers/TextHelper.php` files
 2. add it in composer.json file in auto-load
 
-```bash
+```php
 "autoload": {
     "psr-4": {
         ...
@@ -18,7 +18,7 @@
 
 4. app/Helpers/TextHelper.php
 
-```bash
+```php
 
 <?php
 if (!function_exists('hashPass')) {
@@ -31,6 +31,6 @@ if (!function_exists('hashPass')) {
 
 5. Uses
 
-```bash
+```php
  echo "<h1>Welcome to Laravel 11 ".hashPass("Welcome") ;
 ```

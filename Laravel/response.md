@@ -10,7 +10,7 @@ php artisan make:resource GeneralResponse
 
 - in api routes
 
-```bash
+```php
 use App\Http\Resources\GeneralResponse;
 Route::get('response', function (Request $request) {
     $response = ['type' => 'error', 'code' => 500, 'status' => false, 'message' => 'Sample error response', 'toast' => true];
@@ -20,7 +20,7 @@ Route::get('response', function (Request $request) {
 
 ## Response from request in thunderclient/postman/hoppscotch
 
-```bash
+```json
 {
   "type": "error",
   "status": false,
@@ -33,7 +33,7 @@ Route::get('response', function (Request $request) {
 
 ## make log
 
-```bash
+```php
 use Illuminate\Support\Facades\Log;
 
 Route::get('log', function (Request $request) {
@@ -47,6 +47,6 @@ Route::get('log', function (Request $request) {
 
 - in storage\logs\laravel.log
 
-```bash
+```php
 [2024-07-14 06:47:51] local.INFO: log Error : Division by zero @26 in C:\xampp\htdocs\demo-laravel-11\routes\api.php
 ```

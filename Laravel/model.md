@@ -8,7 +8,7 @@ php artisan make:model Public/Role
 
 - code
 
-```bash
+```php
 namespace App\Models\Public;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -32,7 +32,7 @@ php artisan make:model Public/PrimaryUser -m
 
 1. single row
 
-```bash
+```php
 $primaryUser = PrimaryUser::first();
 if ($primaryUser) {
     print_r($primaryUser->toArray());
@@ -43,7 +43,7 @@ if ($primaryUser) {
 
 2. All/more than one data
 
-```bash
+```php
 $primaryUser = PrimaryUser::get();
 if ($primaryUser->isNotEmpty()) {
     print_r($primaryUser->toArray());
@@ -54,7 +54,7 @@ if ($primaryUser->isNotEmpty()) {
 
 3. Where
 
-```bash
+```php
 $primaryUser = PrimaryUser::where("id", 4)->get();
 // $primaryUser = PrimaryUser::whereIn("id", [4, 5])->get();
 // $primaryUser = PrimaryUser::whereNotIn("id", [4, 5])->get();
@@ -93,9 +93,9 @@ if ($primaryUser->isNotEmpty()) {
 }
 ```
 
-## Route by mode id
+## Route by model id
 
-```bash
+```php
 Route::get("/single-by-id/{user_id}", function (PrimaryUser $user_id) {
     try {
         return response()->json($user_id);
@@ -108,7 +108,7 @@ Route::get("/single-by-id/{user_id}", function (PrimaryUser $user_id) {
 
 ## Create or update
 
-```bash
+```php
 try {
     DB::beginTransaction();
     $userProfile = UserProfile::where("primary_user_id", $user_id)->first();
@@ -128,7 +128,7 @@ try {
 
 ## Some extra model function
 
-```bash
+```php
 $res['maxPostViews'] = Post::max("counter");
 $res['minPostViews'] = Post::min("counter");
 $res['sumPostViews'] = Post::sum("counter");

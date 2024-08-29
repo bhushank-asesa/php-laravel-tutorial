@@ -8,7 +8,7 @@ php artisan make:view add-country
 
 ## in controller
 
-```bash
+```php
 $countries = ['India', "USA", "England"];
 $data = compact("countries");
 return view('add-country', $data);
@@ -16,13 +16,13 @@ return view('add-country', $data);
 
 ## in routes
 
-```bash
+```php
 Route::view('/welcome-2', 'custom.welcome-2', ['name' => 'Taylor']);
 ```
 
 ## Blade template
 
-```bash
+```php
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,7 +37,7 @@ Route::view('/welcome-2', 'custom.welcome-2', ['name' => 'Taylor']);
     @foreach ($countries as $country)
         <li>{{ $country }}</li>
     @endforeach
-    <form action="" method="post">
+    <form action="" method="POST">
         @csrf
         <input type="text" name="country" />
         <button type="submit">Save</button>

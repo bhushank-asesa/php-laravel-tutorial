@@ -16,7 +16,7 @@ php artisan make:migration add_description_to_roles_table --path=database/migrat
 
 ## definition or column list
 
-```bash
+```php
 public function up(): void
 {
     Schema::create('roles', function (Blueprint $table) {
@@ -51,7 +51,7 @@ php artisan migrate:rollback --path=/database/migrations/your_migration_file.php
 
 ## Foreign key in Primary users added by following
 
-```bash
+```php
 $table->unsignedBigInteger("role_id");
 $table->foreign("role_id")->references("id")->on("roles");
 ```

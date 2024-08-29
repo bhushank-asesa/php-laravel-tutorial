@@ -10,7 +10,7 @@ php artisan install:api
 
 1. Routes with blade template
 
-```bash
+```php
 Route::get('/', function () {
     return view('welcome');
 });
@@ -18,7 +18,7 @@ Route::get('/', function () {
 
 2. Routes with blade template
 
-```bash
+```php
 Route::get('/', function () {
     echo "<h1>Welcome to Laravel 11";
 });
@@ -28,7 +28,7 @@ Route::get('/', function () {
 
 3. Routes with group
 
-```bash
+```php
 Route::group(["prefix" => "home"], function () {
     Route::get("/", function () {
         echo "<h1>This is home route<h1>";
@@ -52,19 +52,19 @@ Route::group(["prefix" => "home"], function () {
 
 - create file `resources\views\custom\welcome-2.blade.php`
 
-```bash
+```php
 Route::view('/welcome-2', 'custom.welcome-2', ['name' => 'Taylor']);
 ```
 
 - welcome-2.blade.php
 
-```bash
+```php
 <h1>{{ $name }}</h1>
 ```
 
 5. Routes with parameter
 
-```bash
+```php
 Route::get('/hello/{name}', function ($name) {
     return 'Hello ' . $name;
 });
@@ -76,7 +76,7 @@ Route::get('/hello/{name}', function ($name) {
 
 - Route
 
-```bash
+```php
 Route::get("/about-us/{name}/{company}", function ($name, $company) {
     echo "<h1>This is home about us route<h1> for " . $name . " of " . $company;
 })->name("home-about-us");
@@ -84,7 +84,7 @@ Route::get("/about-us/{name}/{company}", function ($name, $company) {
 
 - View
 
-```bash
+```php
 <a href="{{ route("home-about-us", ['Bhushan', 'Trinity Soft-tech'])}}">
     <h1>{{ $name }}</h1>
 </a>
@@ -96,8 +96,8 @@ Route::get("/about-us/{name}/{company}", function ($name, $company) {
 
 - create file `routes\web-2.php`
 
-```bash
-?php
+```php
+<?php
 Route::get("web-2", function () {
     echo "Web-2 Routes here";
 });
@@ -105,7 +105,7 @@ Route::get("web-2", function () {
 
 - in web.php
 
-```bash
+```php
 require __DIR__ . '/web-2.php'; // Example including the web-2.php file
 ```
 
@@ -113,7 +113,7 @@ require __DIR__ . '/web-2.php'; // Example including the web-2.php file
 
 - in routes\api.php
 
-```bash
+```php
 Route::get('api-home', function (Request $request) {
     echo "This is API-HOME route";
 });
@@ -123,7 +123,7 @@ Route::get('api-home', function (Request $request) {
 
 8. Redirect to route
 
-```bash
+```php
 return redirect("session/view");
 ```
 
@@ -131,7 +131,7 @@ return redirect("session/view");
 
 - View `resources\views\errors\404.blade.php`
 
-```bash
+```php
 <!DOCTYPE html>
 <html lang="en">
 
@@ -151,9 +151,18 @@ return redirect("session/view");
 
 - In `routes\web.php`
 
-```bash
+```php
 Route::fallback(function () {
     $errorMessage = 'Oops! Something went wrong.';
     return response()->view('errors.404', ['error_message' => $errorMessage], 404);
+});
+```
+
+9. Routes with controller group
+
+```php
+Route::controller(YourController::class)->group(function () {
+    Route::get('route-1', 'method1')->name('your-controller-method-route-1');
+    Route::post('route-2', 'method2')->name('your-controller-method-route-2');
 });
 ```

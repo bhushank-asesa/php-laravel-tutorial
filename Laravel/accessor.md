@@ -4,7 +4,7 @@
 
 1. in model `app\Models\User.php`
 
-```bash
+```php
 use Illuminate\Database\Eloquent\Casts\Attribute;
 protected function name(): Attribute
 {
@@ -17,7 +17,7 @@ protected function name(): Attribute
 
 2. Usage
 
-```bash
+```php
 $user = User::create(['name' => $name, "email" => Str::random(7) . "@" . Str::random(7) . ".com", "password" => Str::random(5)]);
     print_r($user->toArray());
 ```
@@ -26,7 +26,7 @@ $user = User::create(['name' => $name, "email" => Str::random(7) . "@" . Str::ra
 
 1. in `app\Models\Public\PrimaryUser.php`
 
-```bash
+```php
  public function age()
 {
     return Carbon::parse($this->attributes['birthdate'])->age;
@@ -35,7 +35,7 @@ $user = User::create(['name' => $name, "email" => Str::random(7) . "@" . Str::ra
 
 2. Usage
 
-```bash
+```php
 $user = PrimaryUser::findOrFail($user_id);
 print_r($user->age());
 return response()->json($user);

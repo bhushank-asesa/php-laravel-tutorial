@@ -2,7 +2,7 @@
 
 ## assets
 
-```bash
+```php
 echo asset("assets/sample.txt");
 ```
 
@@ -10,7 +10,7 @@ echo asset("assets/sample.txt");
 
 ## url
 
-```bash
+```php
 echo url("session/view");
 ```
 
@@ -18,7 +18,7 @@ echo url("session/view");
 
 ## str
 
-```bash
+```php
 $random = Str::random(40);
 echo $random;
 ```
@@ -27,7 +27,7 @@ echo $random;
 
 ## path
 
-```bash
+```php
 $path = public_path();
 echo $path;
 ```
@@ -36,7 +36,7 @@ echo $path;
 
 ## route
 
-```bash
+```php
 $route = route('home-about-us', ['bhushan','infosys']);
 echo $route;
 ```
@@ -45,7 +45,7 @@ echo $route;
 
 ## abort
 
-```bash
+```php
 abort(403);
 ```
 

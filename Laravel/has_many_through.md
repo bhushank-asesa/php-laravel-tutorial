@@ -4,7 +4,7 @@
 
 - User
 
-```bash
+```php
 public function posts()
 {
     return $this->hasMany(Post::class);
@@ -21,7 +21,7 @@ public function myComments()
 
 - Post
 
-```bash
+```php
 public function user()
 {
     return $this->belongsTo(User::class);
@@ -35,7 +35,7 @@ public function comments()
 
 - Comment
 
-```bash
+```php
 public function post()
 {
     return $this->belongsTo(Post::class);
@@ -49,7 +49,7 @@ public function user()
 
 ## Usage
 
-```bash
+```php
 $user = User::find($id);
 $comments = $user->comments;
 // this will return user`s post`s comment

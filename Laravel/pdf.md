@@ -8,7 +8,7 @@ composer require barryvdh/laravel-dompdf
 
 ## Generate pdf
 
-```bash
+```php
 use Barryvdh\DomPDF\Facade\Pdf;
 
 $pdfData['view'] = "mail.welcome";

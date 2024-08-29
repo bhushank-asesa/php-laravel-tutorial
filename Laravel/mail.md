@@ -21,7 +21,7 @@ php artisan make:mail WelcomeEmail
 
 ## Mail class `app\Mail\WelcomeEmail.php`
 
-```bash
+```php
 <?php
 
 namespace App\Mail;
@@ -92,7 +92,7 @@ class WelcomeEmail extends Mailable
 
 ## View `resources\views\mail\welcome.blade.php`
 
-```bash
+```php
 <?php extract($data); ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -110,7 +110,7 @@ class WelcomeEmail extends Mailable
 
 ## Usage
 
-```bash
+```php
 
 use App\Mail\WelcomeEmail;
 use Illuminate\Support\Facades\Mail;

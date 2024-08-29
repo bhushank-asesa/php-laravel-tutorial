@@ -6,7 +6,7 @@
 2. Make has many relation User->Post
 3. In `app\Models\User.php`
 
-```bash
+```php
 protected static function booted(): void
 {
     static::deleted(function ($user) {
@@ -18,7 +18,7 @@ protected static function booted(): void
 
 4. Delete user
 
-```bash
+```php
 $userDeleted = User::find($user_id)->delete();
 ```
 

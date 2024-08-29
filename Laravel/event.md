@@ -1,40 +1,50 @@
-# Model Events
+# Event and Event Listener
 
-## Model Events
+## Creation
 
-1. Create Post and User model
-2. Make has many relation User->Post
-3. In `app\Models\User.php`
+- Create Event and Event Listener
+
+```bash
+php artisan make:event UserCreated
+php artisan make:listener UserCreatedListener --event=UserCreated
+
+```
+
+## Code
+
+1. Edit UserCreated Event `app\Events\UserCreated.php`
 
 ```php
-protected static function booted(): void
+public $user;
+public function __construct($user)
 {
-    static::deleted(function ($user) {
-        // $user->post()->delete(); // not works when foreign key is on/established
-        Log::info('User Deleted : ' . $user->id);
-    });
+    $this->user = $user;
 }
 ```
 
-4. Delete user
+2. In Listener `app\Listeners\UserCreatedListener.php` handle method
 
 ```php
-$userDeleted = User::find($user_id)->delete();
+$today = Carbon::today()->format('Y-m-d');
+// Find or create a DayWiseUserCreation record
+$dayWiseUserCreation = UserCount::firstOrCreate([
+    'register_date' => $today,
+]);
+// Increment the counter
+$dayWiseUserCreation->increment('count');
+$dayWiseUserCreation->save();
 ```
 
-5. Other event
+3. Register Event in `app\Providers\AppServiceProvider.php` Method => boot
 
-- creating: Call Before Create Record.
-- created: Call After Created Record.
-- updating: Call Before Update Record.
-- updated: Class After Updated Record.
-- deleting: Call Before Delete Record.
-- deleted: Call After Deleted Record.
-- retrieved: Call Retrieve Data from Database.
-- saving: Call Before Creating or Updating Record.
-- saved: Call After Created or Updated Record.
-- restoring: Call Before Restore Record.
-- restored: Call After Restore Record.
-- replicating: Call on replicate Record.
+```php
+Event::listen(
+    UserCreatedListener::class,
+);
+```
 
-## Observer and model event work on single object
+4. Call Event
+
+```php
+event(new UserCreated($jobUser));
+```

@@ -85,7 +85,14 @@ composer require mongodb/laravel-mongodb
 ```bash
 php artisan make:model Store
 ```
+- use MongoDB model class
+  ```php
+  use MongoDB\Laravel\Eloquent\Model;
+  class Store extends Model
+    {
 
+    }
+  ```
 5. CRUD
 
 ```php

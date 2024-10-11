@@ -9,7 +9,13 @@ php artisan make:job WelcomeUser
 php artisan make:job Sleep
 ```
 
-2. Make migration but in Laravel 11 Migration exists already
+2. To start a queue worker
+
+```bash
+php artisan queue:work
+```
+
+3.  Make migration but in Laravel 11 Migration exists already
 
 ```bash
 php artisan queue:table

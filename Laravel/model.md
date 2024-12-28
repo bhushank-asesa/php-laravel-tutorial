@@ -134,3 +134,35 @@ $res['minPostViews'] = Post::min("counter");
 $res['sumPostViews'] = Post::sum("counter");
 $res['avgPostViews'] = Post::avg("counter");
 ```
+
+## DB Raw
+
+```php
+Employee::create(["username" => "dfdgf", "birthdate" => DB::raw("default"), "division" => "B"]);
+
+Employee::where("id", 7)->update(["division" => DB::raw("default")]);
+
+$arr = Employee::select('division', DB::raw('group_concat(username) as usernames'), DB::raw('group_concat(username separator ", ") as unames'))->groupBy("division")->get();
+```
+
+> Output
+
+```bash
+Array
+(
+    [0] => Array
+        (
+            [division] => A
+            [usernames] => manish,kalpak,abcd,dfdgf
+            [unames] => manish, kalpak, abcd, dfdgf
+        )
+
+    [1] => Array
+        (
+            [division] => b
+            [usernames] => sourabh,bhushan
+            [unames] => sourabh, bhushan
+        )
+
+)
+```

@@ -200,3 +200,29 @@ for ($row = 3; $row <= $highestRow; $row++) {
     $newSheet = $spreadsheet->createSheet();
     $newSheet->setTitle("Jan");
 ```
+
+## Read Excel
+
+### Laravel Upload Excel File
+- Validtion
+```php
+$rules = ['sheetFile' => 'required|file|mimes:xlsx'];
+$errorMessages = [];
+$validator = Validator::make($request->all(), $rules, $errorMessages);
+if ($validator->fails()) {
+    throw new Exception($validator->errors()->first(), 404);
+}
+```
+
+- Reading Excel Code
+```php
+use PhpOffice\PhpSpreadsheet\IOFactory;
+
+$sheetFile = $request->file('sheetFile');
+$excelData = [];
+if ($sheetFile) {
+    $spreadsheet = IOFactory::load($sheetFile);
+    $worksheet = $spreadsheet->getSheet(0); // get first sheet only
+    $excelData = $worksheet->toArray();
+}
+```

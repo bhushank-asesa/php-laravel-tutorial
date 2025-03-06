@@ -13,6 +13,14 @@ protected static function booted(): void
         // $user->post()->delete(); // not works when foreign key is on/established
         Log::info('User Deleted : ' . $user->id);
     });
+    static::updating(function ($user) {
+        $oldValues = $user->getOriginal(); // Get old values before update
+        $newValues = $user->getAttributes(); // Get new values being updated
+
+        info('User updating - Old Values: ' . json_encode($oldValues));
+        info('User updating - New Values: ' . json_encode($newValues));
+        info('User updating : ' . json_encode($user));
+    });
 }
 ```
 

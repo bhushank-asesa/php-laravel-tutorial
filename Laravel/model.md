@@ -166,3 +166,23 @@ Array
 
 )
 ```
+## Model Casting
+
+```php
+class Role extends Model
+{
+     protected $casts = [
+        'tags' => "array" // when store/update tags of array will store as json tags should be json
+    ];
+    protected $guarded = ['id', 'deleted_at']; // avoid this column updation/insertion in bulk/mass assign; don't use it with fillable; it is opposite to fillable
+
+}
+
+$user = User::where("id", 15)->first();
+if ($user) {
+    // $user->tags = ["New", "Best Seller"]; // store as json
+    // $user->save();
+    return $user->tags[0]; // retrive as json
+}
+```
+

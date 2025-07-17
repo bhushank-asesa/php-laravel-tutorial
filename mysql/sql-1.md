@@ -55,3 +55,26 @@ FROM
     `emp_compensation`
 group by emp_id
 ```
+
+## Find employees with salary more than their mangers salary
+
+```sql
+create table emp_manager(emp_id int,emp_name varchar(50),salary int(20),manager_id int(10));
+```
+
+```sql
+insert into emp_manager values(	1	,'Ankit',	10000	,4	);
+insert into emp_manager values(	2	,'Mohit',	15000	,5	);
+insert into emp_manager values(	3	,'Vikas',	10000	,4	);
+insert into emp_manager values(	4	,'Rohit',	5000	,2	);
+insert into emp_manager values(	5	,'Mudit',	12000	,6	);
+insert into emp_manager values(	6	,'Agam',	12000	,2	);
+insert into emp_manager values(	7	,'Sanjay',	9000	,2	);
+insert into emp_manager values(	8	,'Ashish',	5000	,2	);
+```
+
+```sql
+SELECT e.emp_id, e.emp_name,e.salary, m.emp_name as manager_name, m.salary as manager_salary from emp_manager e 
+INNER join emp_manager m on e.manager_id = m.emp_id 
+where e.salary > m.salary
+```

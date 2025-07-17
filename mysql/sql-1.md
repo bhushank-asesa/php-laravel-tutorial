@@ -78,3 +78,19 @@ SELECT e.emp_id, e.emp_name,e.salary, m.emp_name as manager_name, m.salary as ma
 INNER join emp_manager m on e.manager_id = m.emp_id 
 where e.salary > m.salary
 ```
+
+## SQL to Count Occurrence of a Character/Word in a String
+
+```sql
+SELECT emp_name,REPLACE(emp_name," ",""),length(emp_name)-length(REPLACE(emp_name," ","")) as empName FROM `emp_manager`;
+```
+
+```sql
+SELECT
+    emp_name,
+    REPLACE(emp_name, "Sa", ""),
+    length(emp_name)-length(REPLACE(emp_name, "Sa", "")) as  difference,
+    cast((length(emp_name)-length(REPLACE(emp_name, "Sa", "")))/length("Sa") as unsigned) as occurence
+FROM
+    `emp_manager`;
+```

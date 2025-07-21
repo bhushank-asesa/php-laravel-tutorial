@@ -78,3 +78,39 @@ values (10, 'Rakesh',300,7000,6,50);
 ```sql
 SELECT emp_id,count(1) from emp group by emp_id HAVING count(1) > 1
 ```
+
+## UPDATE Statement | SQL UPDATE A-Z Tutorial | SQL Update with JOIN
+
+```sql
+update emp set salary = salary * 1.2
+```
+
+```sql
+update emp set salary = case when department_id = 100 then salary * 1.5 else salary * 2.1 end
+```
+
+```sql
+ALTER TABLE `emp` ADD `dept_name` VARCHAR(255) CHARACTER SET armscii8 COLLATE armscii8_bin NULL DEFAULT NULL AFTER `emp_age`, ADD `gender` VARCHAR(255) NULL DEFAULT NULL AFTER `dept_name`;
+```
+
+```sql
+UPDATE emp e
+INNER JOIN dept d ON e.department_id = d.dep_id
+SET e.dept_name = d.dep_name;
+```
+
+- Swap Values
+
+```sql
+update emp set gender = case when department_id = 100 then "Female" else "Male" end
+```
+
+> Before Update Preview
+
+```sql
+select *,case when gender = "Female" then "Male" else "Female" end as newGender from emp
+```
+
+```sql
+update emp set gender = case when gender = "Female" then "Male" else "Female" end
+```

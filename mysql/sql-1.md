@@ -113,12 +113,35 @@ select id,count(*) as frquency from mode group by id;
 ```sql
 SELECT * FROM `maxmode` WHERE frquency = (select max(frquency) from maxmode)
 ```
+
 ```sql
 SELECT *,rank() over (order by frquency DESC) as rank FROM `maxmode`
 ```
+
 ```sql
 SELECT * FROM (
     SELECT *, RANK() OVER (ORDER BY frquency DESC) AS rank 
     FROM maxmode
 ) AS ranked
 WHERE rank = 1;
+```
+
+## Regex search
+
+* Search records where second charcter is any of a to f
+
+```sql
+SELECT * FROM `emp_manager` WHERE emp_name REGEXP  '^.[a-f]' 
+```
+
+* Search records where second charcter is not n or p
+
+```sql
+SELECT * FROM `emp_manager` WHERE emp_name REGEXP  '^.[^no]' 
+```
+
+* Search records where second charcter is n or p
+
+```sql
+SELECT * FROM `emp_manager` WHERE emp_name REGEXP  '^.[^no]' 
+```

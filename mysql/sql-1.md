@@ -94,3 +94,31 @@ SELECT
 FROM
     `emp_manager`;
 ```
+
+## How to Calculate Mode in SQL | How to Find Most Frequent Value in a Column
+
+```sql
+create table mode (id int);
+```
+
+```sql
+insert into mode values (1),(2),(2),(3),(3),(3),(3),(4),(5);
+```
+
+```sql
+create view maxMode as 
+select id,count(*) as frquency from mode group by id;
+```
+
+```sql
+SELECT * FROM `maxmode` WHERE frquency = (select max(frquency) from maxmode)
+```
+```sql
+SELECT *,rank() over (order by frquency DESC) as rank FROM `maxmode`
+```
+```sql
+SELECT * FROM (
+    SELECT *, RANK() OVER (ORDER BY frquency DESC) AS rank 
+    FROM maxmode
+) AS ranked
+WHERE rank = 1;

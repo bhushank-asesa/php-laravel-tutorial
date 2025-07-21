@@ -74,8 +74,8 @@ insert into emp_manager values(	8	,'Ashish',	5000	,2	);
 ```
 
 ```sql
-SELECT e.emp_id, e.emp_name,e.salary, m.emp_name as manager_name, m.salary as manager_salary from emp_manager e 
-INNER join emp_manager m on e.manager_id = m.emp_id 
+SELECT e.emp_id, e.emp_name,e.salary, m.emp_name as manager_name, m.salary as manager_salary from emp_manager e
+INNER join emp_manager m on e.manager_id = m.emp_id
 where e.salary > m.salary
 ```
 
@@ -90,7 +90,7 @@ SELECT
     emp_name,
     REPLACE(emp_name, "Sa", ""),
     length(emp_name)-length(REPLACE(emp_name, "Sa", "")) as  difference,
-    cast((length(emp_name)-length(REPLACE(emp_name, "Sa", "")))/length("Sa") as unsigned) as occurence
+    cast((length(emp_name)-length(REPLACE(emp_name, "Sa", "")))/length("Sa") as unsigned) as occurrence
 FROM
     `emp_manager`;
 ```
@@ -106,21 +106,21 @@ insert into mode values (1),(2),(2),(3),(3),(3),(3),(4),(5);
 ```
 
 ```sql
-create view maxMode as 
-select id,count(*) as frquency from mode group by id;
+create view maxMode as
+select id,count(*) as frequency from mode group by id;
 ```
 
 ```sql
-SELECT * FROM `maxmode` WHERE frquency = (select max(frquency) from maxmode)
+SELECT * FROM `maxmode` WHERE frequency = (select max(frequency) from maxmode)
 ```
 
 ```sql
-SELECT *,rank() over (order by frquency DESC) as rank FROM `maxmode`
+SELECT *,rank() over (order by frequency DESC) as rank FROM `maxmode`
 ```
 
 ```sql
 SELECT * FROM (
-    SELECT *, RANK() OVER (ORDER BY frquency DESC) AS rank 
+    SELECT *, RANK() OVER (ORDER BY frequency DESC) AS rank
     FROM maxmode
 ) AS ranked
 WHERE rank = 1;
@@ -128,20 +128,20 @@ WHERE rank = 1;
 
 ## Regex search
 
-* Search records where second charcter is any of a to f
+- Search records where second charcter is any of a to f
 
 ```sql
-SELECT * FROM `emp_manager` WHERE emp_name REGEXP  '^.[a-f]' 
+SELECT * FROM `emp_manager` WHERE emp_name REGEXP  '^.[a-f]'
 ```
 
-* Search records where second charcter is not n or p
+- Search records where second character is not n or p
 
 ```sql
-SELECT * FROM `emp_manager` WHERE emp_name REGEXP  '^.[^no]' 
+SELECT * FROM `emp_manager` WHERE emp_name REGEXP  '^.[^no]'
 ```
 
-* Search records where second charcter is n or p
+- Search records where second character is n or p
 
 ```sql
-SELECT * FROM `emp_manager` WHERE emp_name REGEXP  '^.[^no]' 
+SELECT * FROM `emp_manager` WHERE emp_name REGEXP  '^.[^no]'
 ```

@@ -1,6 +1,6 @@
 #
 
-## Custom sort
+## 13 Custom sort
 
 ```sql
 create table happiness_index
@@ -79,7 +79,7 @@ values (10, 'Rakesh',300,7000,6,50);
 SELECT emp_id,count(1) from emp group by emp_id HAVING count(1) > 1
 ```
 
-## UPDATE Statement | SQL UPDATE A-Z Tutorial | SQL Update with JOIN
+## 11 UPDATE Statement | SQL UPDATE A-Z Tutorial | SQL Update with JOIN
 
 ```sql
 update emp set salary = salary * 1.2

@@ -56,7 +56,7 @@ FROM
 group by emp_id
 ```
 
-## Find employees with salary more than their managers salary
+## 4 Find employees with salary more than their managers salary
 
 ```sql
 create table emp_manager(emp_id int,emp_name varchar(50),salary int(20),manager_id int(10));

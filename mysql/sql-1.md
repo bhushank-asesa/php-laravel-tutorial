@@ -1,6 +1,6 @@
 # SQL 1
 
-## Filter `Where vs Having`
+## 1 Filter `Where vs Having`
 
 1. where filter on each row
 2. having work on aggregate function wherever grouping is needed
@@ -10,7 +10,7 @@
 5. where has priority over having
 6. having slower than where
 
-## SQL Convert Rows to Columns and Columns to Rows without using Pivot Functions
+## 2 SQL Convert Rows to Columns and Columns to Rows without using Pivot Functions
 
 ```sql
 create table emp_compensation (
@@ -56,7 +56,7 @@ FROM
 group by emp_id
 ```
 
-## Find employees with salary more than their mangers salary
+## Find employees with salary more than their managers salary
 
 ```sql
 create table emp_manager(emp_id int,emp_name varchar(50),salary int(20),manager_id int(10));
@@ -79,7 +79,7 @@ INNER join emp_manager m on e.manager_id = m.emp_id
 where e.salary > m.salary
 ```
 
-## SQL to Count Occurrence of a Character/Word in a String
+## 16 SQL to Count Occurrence of a Character/Word in a String
 
 ```sql
 SELECT emp_name,REPLACE(emp_name," ",""),length(emp_name)-length(REPLACE(emp_name," ","")) as empName FROM `emp_manager`;
@@ -95,7 +95,7 @@ FROM
     `emp_manager`;
 ```
 
-## How to Calculate Mode in SQL | How to Find Most Frequent Value in a Column
+## 8 How to Calculate Mode in SQL | How to Find Most Frequent Value in a Column
 
 ```sql
 create table mode (id int);
@@ -126,7 +126,7 @@ SELECT * FROM (
 WHERE rank = 1;
 ```
 
-## Regex search
+## 25 Regex search
 
 - Search records where second charcter is any of a to f
 

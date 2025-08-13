@@ -145,3 +145,75 @@ SELECT * FROM `emp_manager` WHERE emp_name REGEXP  '^.[^no]'
 ```sql
 SELECT * FROM `emp_manager` WHERE emp_name REGEXP  '^.[^no]'
 ```
+
+## 14 Problem with Running SUM in SQL | Watch it to Avoid The Mistake
+
+> Price 200,300,300,500,750
+
+```sql
+SELECT *,sum(price) over (order by price asc) as running_cost FROM cost
+```
+
+```bash
+200,800,800,1300,2050
+```
+
+- To avoid 800,800 use id is order
+
+```sql
+SELECT *,sum(price) over (order by price asc,id asc) as running_cost FROM cost
+```
+
+```bash
+200,500,800,1300,2050
+```
+
+## 15 Difference Between count(\*) ,count(0),count(-1),count(col),count('youtube')
+
+```sql
+SELECT count(*),count(1),count(0),count(-1),count('abc'),count(price),count(DISTINCT price) FROM `cost`
+```
+
+- output
+
+| count(\*) | count(1) | count(0) | count(-1) | count('abc') | count(price) | count(DISTINCT price) |
+| --------- | -------- | -------- | --------- | ------------ | ------------ | --------------------- |
+| 6         | 6        | 6        | 6         | 6            | 5            | 4                     |
+
+- count(\*),count(1),count(0),count(-1),count('abc')
+  - It will give all count
+- count(price)
+  - It will give all count except null for that column
+- count(DISTINCT price)
+
+  - It will give all unique count except null for that column
+
+## 17 All About SQL Aggregations
+
+- Group By
+
+```sql
+ SELECT salesperson_id, sum(amount) FROM `int_orders` group by salesperson_id
+```
+
+- It has one drawback only add column in select which are present in group by
+- To overcome this use
+
+```sql
+SELECT salesperson_id,order_date, amount, sum(amount) over (PARTITION by salesperson_id) FROM `int_orders`
+```
+
+```sql
+SELECT salesperson_id,order_date,amount, sum(amount) over (order by order_date ) FROM `int_orders`
+```
+
+- this is as running amount
+
+```sql
+SELECT salesperson_id,order_date,amount, sum(amount) over (order by order_date rows BETWEEN 2 preceding and current row) FROM `int_orders`;
+```
+
+- It will give last two and current sum
+- Various combination
+  - unbound => no above limit
+  - following => next one

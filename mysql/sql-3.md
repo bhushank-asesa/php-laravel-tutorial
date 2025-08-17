@@ -108,3 +108,145 @@ full outer join dept d on e.department_id = d.dep_id
 ```
 
 > null=null not joined in full outer record
+
+## 18 SQL Full Outer Join Using UNION For MySQL
+
+```sql
+SELECT emp_id,dept_name,department_id,d.dep_id,d.dep_name FROM emp e
+left join dept d on e.department_id = d.dep_id
+
+UNION
+
+SELECT emp_id,dept_name,department_id,d.dep_id,d.dep_name FROM dept d
+left join emp e on d.dep_id = e.department_id
+```
+
+## 19 RANK, DENSE_RANK, ROW_NUMBER SQL Analytical Functions Simplified
+
+```sql
+select * ,
+rank() over(order by salary desc) as rnk,
+dense_rank() over(order by salary desc) as drnk,
+row_number() over(order by salary desc) as rn
+from emp
+```
+
+- rank will skip number that is 1,1,3,3,5
+- dense rank will not skip eg 1,1,2,2,3
+- you can use partition by
+- Find Second Highest Salary by partition
+
+```sql
+select _ from (select _,department_id as did,dense_rank() over (PARTITION by department_id order by salary desc) as rn from emp) a where rn=2
+```
+
+## 20 SQL Left Outer Join Master Class
+
+```sql
+SELECT * FROM emp e
+left join dept d on e.department_id = d.dep_id where d.dep_name = 'Analyst'
+```
+
+- only gives Analyst rows
+
+```sql
+SELECT * FROM emp e
+left join dept d on e.department_id = d.dep_id and d.dep_name = 'Analyst'
+```
+
+- This will give analyst join and nul for others like inner join
+- on dep_name = 'Analyst' will join and other will null
+
+```sql
+SELECT * FROM emp e
+left join dept d on e.department_id = d.dep_id and e.salary = 27000
+```
+
+- on salary 27000 will join and other will null
+
+## 22 Solving a REAL Business Use Case Using SQL | Business Days Excluding Weekends and Public Holidays
+
+## 23 Convert Comma Separated Values into Rows
+
+```sql
+SELECT
+    *,
+    DATEDIFF(resolved_date, create_date) AS actual_days,
+    DATEDIFF(resolved_date, create_date) - 2 *(
+        WEEK(resolved_date) - WEEK(create_date)
+    ) as businessDays
+FROM
+    tickets
+```
+
+```sql
+SELECT
+    t.ticket_id,
+    t.create_date,
+    t.resolved_date,
+    COUNT(h.holiday_date) AS no_of_holidays
+FROM
+    tickets t
+LEFT JOIN holidays h ON
+    h.holiday_date BETWEEN t.create_date AND t.resolved_date
+GROUP BY
+    t.ticket_id,
+    t.create_date,
+    t.resolved_date
+```
+
+```sql
+SELECT
+    *,
+    DATEDIFF(resolved_date, create_date) AS actual_days,
+    DATEDIFF(resolved_date, create_date) - 2 *(
+        WEEK(resolved_date) - WEEK(create_date)
+    ) -no_of_holidays as businessDays from (SELECT
+    t.ticket_id,
+    t.create_date,
+    t.resolved_date,
+    COUNT(h.holiday_date) AS no_of_holidays
+FROM
+    tickets t
+LEFT JOIN holidays h ON
+    h.holiday_date BETWEEN t.create_date AND t.resolved_date
+GROUP BY
+    t.ticket_id,
+    t.create_date,
+    t.resolved_date) a
+```
+
+```sql
+SELECT
+    *,
+    DATEDIFF(resolved_date, create_date) AS actual_days,
+    DATEDIFF(resolved_date, create_date) - 2 *(
+        WEEK(resolved_date) - WEEK(create_date)
+    ) -no_of_holidays as businessDays from (SELECT
+    t.ticket_id,
+    t.create_date,
+    t.resolved_date,
+    COUNT(h.holiday_date) AS no_of_holidays
+FROM
+    tickets t
+LEFT JOIN holidays h ON
+    h.holiday_date BETWEEN t.create_date AND t.resolved_date
+and dayname(h.holiday_date) <> 'Saturday' AND  dayname(h.holiday_date) <> 'Sunday'
+GROUP BY
+    t.ticket_id,
+    t.create_date,
+    t.resolved_date) a;
+```
+
+## 24 Aggregation and Window Functions Together in a Single SQL
+
+```sql
+select * from (
+    select category,product_name,sum(sales) as total_sales,
+    rank() over (partition by category order by sum(sales) desc) as rn
+    from orders
+) a
+where rn <= 5
+```
+
+- it will group first then partition

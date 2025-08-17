@@ -39,7 +39,7 @@ order by
     Happiness_2021 desc
 ```
 
-## Top 10 interview question
+## 3 Top 10 interview question
 
 ```sql
 create table emp(
@@ -78,6 +78,54 @@ values (10, 'Rakesh',300,7000,6,50);
 ```sql
 SELECT emp_id,count(1) from emp group by emp_id HAVING count(1) > 1
 ```
+
+### Delete duplicate records
+
+````
+
+### Difference between union and union all
+
+```sql
+SELECT emp_id FROM emp
+union all
+select emp_id from emp1;
+
+SELECT emp_id FROM emp
+union
+select emp_id from emp1;
+````
+
+- **union all** Gives all records with duplicates
+- **union** Gives all records without duplicates
+
+### Find second highest salary from each dept
+
+```sql
+select *,department_id as did,dense_rank() over (PARTITION by department_id order by salary desc) as rn from emp
+```
+
+```sql
+select * from (select *,department_id as did,dense_rank() over (PARTITION by department_id order by salary desc) as rn from emp) a where rn=2
+```
+
+- rank will skip number that is 1,1,3,3,5
+- dense rank will not skip eg 1,1,2,2,3
+
+### Employee not in department table
+
+```sql
+SELECT * FROM emp
+left join dept on emp.department_id = dept.dep_id
+where dept.dep_id is null
+```
+
+### Find all rows where emp name is `Rohit`
+
+```sql
+SELECT * FROM `emp` where upper(emp_name) = "ROHIT"
+```
+
+- check for upper
 
 ## 11 UPDATE Statement | SQL UPDATE A-Z Tutorial | SQL Update with JOIN
 

@@ -41,8 +41,8 @@ FROM
 
 ## Cross join
 
-* Don't give any Condition
-* Gives cartesian product
+- Don't give any Condition
+- Gives cartesian product
 
 ```sql
 SELECT p.name,s.size,c.color FROM products as p,sizes as s,colors as c
@@ -54,7 +54,7 @@ SELECT p.name,s.size,c.color FROM products as p,sizes as s,colors as c
 SELECT t.product_name,t.size,t.color,sum(t.amount) as total_amount from transactions t group by t.product_name,t.color,t.size
 ```
 
-* but it will give for sold records
+- but it will give for sold records
 
 ```sql
 with txns as (SELECT t.product_name,t.size,t.color,sum(t.amount) as total_amount from transactions t group by t.product_name,t.color,t.size),
@@ -65,7 +65,7 @@ left join txns t on m.name = t.product_name and m.size = t.size and m.color = t.
 order by total_amount
 ```
 
-* it will 0 for not sold products with cross join
+- it will 0 for not sold products with cross join
 
 ### Prepare large no of rows for performance Testing
 
@@ -73,7 +73,7 @@ order by total_amount
 
 ### Inner Join
 
-* Common record
+- Common record
 
 ```sql
 SELECT * FROM emp e
@@ -82,7 +82,7 @@ inner join dept d on e.department_id = d.dep_id
 
 ### Left Join
 
-* Common record with non matching left table record
+- Common record with non matching left table record
 
 ```sql
 SELECT * FROM emp e
@@ -91,7 +91,7 @@ left join dept d on e.department_id = d.dep_id
 
 ### Right Join
 
-* Common record with non matching right table record=
+- Common record with non matching right table record=
 
 ```sql
 SELECT * FROM emp e
@@ -100,7 +100,7 @@ right join dept d on e.department_id = d.dep_id
 
 ### Full Outer Join
 
-* Gives everything
+- Gives everything
 
 ```sql
 SELECT * FROM emp e
@@ -131,10 +131,10 @@ row_number() over(order by salary desc) as rn
 from emp
 ```
 
-* rank will skip number that is 1, 1, 3, 3, 5
-* dense rank will not skip eg 1, 1, 2, 2, 3
-* you can use partition by
-* Find Second Highest Salary by partition
+- rank will skip number that is 1, 1, 3, 3, 5
+- dense rank will not skip eg 1, 1, 2, 2, 3
+- you can use partition by
+- Find Second Highest Salary by partition
 
 ```sql
 select _ from (select _,department_id as did,dense_rank() over (PARTITION by department_id order by salary desc) as rn from emp) a where rn=2
@@ -147,22 +147,22 @@ SELECT * FROM emp e
 left join dept d on e.department_id = d.dep_id where d.dep_name = 'Analyst'
 ```
 
-* only gives Analyst rows
+- only gives Analyst rows
 
 ```sql
 SELECT * FROM emp e
 left join dept d on e.department_id = d.dep_id and d.dep_name = 'Analyst'
 ```
 
-* This will give analyst join and nul for others like inner join
-* on dep_name = 'Analyst' will join and other will null
+- This will give analyst join and nul for others like inner join
+- on dep_name = 'Analyst' will join and other will null
 
 ```sql
 SELECT * FROM emp e
 left join dept d on e.department_id = d.dep_id and e.salary = 27000
 ```
 
-* on salary 27000 will join and other will null
+- on salary 27000 will join and other will null
 
 ## 22 Solving a REAL Business Use Case Using SQL | Business Days Excluding Weekends and Public Holidays
 
@@ -249,7 +249,7 @@ select * from (
 where rn <= 5
 ```
 
-* it will group first then partition
+- it will group first then partition
 
 ## 27 first_value and last_value SQL window functions
 
@@ -260,8 +260,8 @@ first_value(emp_name) over (order by emp_age) as youngest
 from employee e
 ```
 
-* **first_value** -> it gives first value but always has first value based on over
-* **last_value** -> it gives last value but till row because next rows are unknown
+- **first_value** -> it gives first value but always has first value based on over
+- **last_value** -> it gives last value but till row because next rows are unknown
 
 ```sql
 select *,
@@ -270,7 +270,7 @@ first_value(emp_name) over (order by emp_age) as youngest
 from employee e
 ```
 
-* This Solve last value next row problem
+- This Solve last value next row problem
 
 ```sql
 select *,
@@ -279,4 +279,4 @@ first_value(emp_name) over (PARTITION by e.dept_id order by emp_age) as youngest
 from employee e
 ```
 
-* added partition to it
+- added partition to it

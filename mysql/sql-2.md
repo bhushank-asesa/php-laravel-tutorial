@@ -162,3 +162,147 @@ select *,case when gender = "Female" then "Male" else "Female" end as newGender 
 ```sql
 update emp set gender = case when gender = "Female" then "Male" else "Female" end
 ```
+
+## 29 How To Create Dynamic Insert Statements From a Table Data
+
+```sql
+SELECT concat('insert into emp3 values(',emp_id,',',char(39),emp_name,char(39),',',salary,',',char(39),dob,char(39),');') from emp3;
+```
+
+## 30 SQL Running Total | Advance SQL | Rolling N months SUM, AVG, MIN, MAX
+
+- First select date part year and month, sum by grouping year and month
+- convert it into cte
+- using cte calculate sum and other over order by year, month with rows between 1 preceding and 1 following
+  - Use Your combination
+
+## 33 SQL Order of Execution (Logical Explanation)
+
+- from -> join -> where -> group by -> having -> select -> order by -> limit
+
+## 47 Date and Time Functions in MySQL
+
+```sql
+SELECT now(),CURRENT_DATE(),CURRENT_TIME()
+```
+
+| now()               | CURRENT_DATE() | CURRENT_TIME() |
+| ------------------- | -------------- | -------------- |
+| 2025-08-19 20:38:28 | 2025-08-19     | 20:38:28       |
+
+---
+
+```sql
+SELECT created_at,date(created_at) as date_1,cast(created_at as date) as date_2 FROM `date_functions_demo`
+```
+
+| created_at          | date_1     | date_2     |
+| ------------------- | ---------- | ---------- |
+| 2024-01-01 10:00:00 | 2024-01-01 | 2024-01-01 |
+
+---
+
+```sql
+SELECT created_at,last_day(created_at) as lastDay FROM `date_functions_demo`
+```
+
+| created_at          | lastDay    |
+| ------------------- | ---------- |
+| 2024-01-01 10:00:00 | 2024-01-31 |
+| 2023-06-15 08:30:00 | 2023-06-30 |
+
+---
+
+```sql
+SELECT created_at,extract(day from created_at) as createdDay,extract(month from created_at) as createdMonth FROM `date_functions_demo`
+```
+
+| created_at          | createdDay | createdMonth |
+| ------------------- | ---------- | ------------ |
+| 2024-01-01 10:00:00 | 1          | 1            |
+| 2023-06-15 08:30:00 | 15         | 6            |
+
+---
+
+```sql
+SELECT created_at,date_format(created_at,'%d/%m/%y') as customFormatDate FROM `date_functions_demo`
+```
+
+| created_at          | customFormatDate |
+| ------------------- | ---------------- |
+| 2024-01-01 10:00:00 | 01/01/24         |
+| 2023-06-15 08:30:00 | 15/06/23         |
+
+---
+
+```sql
+SELECT start_date,end_date,datediff(end_date,start_date) FROM `date_functions_demo`
+```
+
+| start_date | end_date   | datediff(end_date,start_date) |
+| ---------- | ---------- | ----------------------------- |
+| 2024-01-01 | 2024-12-31 | 365                           |
+| 2023-06-15 | 2024-06-15 | 366                           |
+
+---
+
+```sql
+SELECT start_date, date_add(start_date, interval 2 day) add_2_day,date_add(start_date, interval 1 month) add_1_month FROM `date_functions_demo`
+```
+
+| start_date | add_2_day  | add_1_month |
+| ---------- | ---------- | ----------- |
+| 2024-01-01 | 2024-01-03 | 2024-02-01  |
+| 2023-06-15 | 2023-06-17 | 2023-07-15  |
+
+---
+
+```sql
+SELECT start_date, date_sub(start_date, interval 2 day) sub_2_day,date_sub(start_date, interval 1 month) sub_1_month FROM `date_functions_demo`
+```
+
+| start_date | sub_2_day  | sub_1_month |
+| ---------- | ---------- | ----------- |
+| 2024-01-01 | 2023-12-30 | 2023-12-01  |
+
+---
+
+```sql
+SELECT created_at, day(created_at), month(created_at),year(created_at), dayofweek(created_at), dayofyear(created_at),dayofmonth(created_at) FROM `date_functions_demo`;
+```
+
+| day(created_at) | created_at          | month(created_at) | year | (created_at) | dayofweek(created_at) | dayofyear(created_at) | dayofmonth(created_at) |
+| --------------- | ------------------- | ----------------- | ---- | ------------ | --------------------- | --------------------- | ---------------------- |
+| 1               | 2024-01-01 10:00:00 | 1                 | 2024 | 2            | 1                     | 1                     | 1                      |
+| 15              | 2023-06-15 08:30:00 | 6                 | 2023 | 5            | 166                   | 15                    | 15                     |
+
+---
+
+```sql
+SELECT created_at, monthname(created_at) as monthName,dayname(created_at) as dayName FROM `date_functions_demo`;
+```
+
+| created_at          | monthName | dayName  |
+| ------------------- | --------- | -------- |
+| 2024-01-01 10:00:00 | January   | Monday   |
+| 2023-06-15 08:30:00 | June      | Thursday |
+
+---
+
+```sql
+SELECT system_date,str_to_date(system_date,"%d/%m/%y") as nullDate,str_to_date(system_date,"%m/%d/%y") as correctDate FROM `date_functions_demo`;
+```
+
+| system_date | nullDate | correctDate |
+| ----------- | -------- | ----------- |
+| 12/30/2024  | NULL     | 2020-12-30  |
+
+---
+
+```sql
+SELECT created_at,updated_at,timestampdiff(minute,created_at,updated_at) as minuteDiff,timestampdiff(day,created_at,updated_at) as dayDiff FROM `date_functions_demo`;
+```
+
+| created_at          | updated_at          | minuteDiff | dayDiff |
+| ------------------- | ------------------- | ---------- | ------- |
+| 2024-01-01 10:00:00 | 2024-12-31 23:59:59 | 526439     | 365     |

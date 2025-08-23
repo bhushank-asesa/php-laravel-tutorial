@@ -121,7 +121,7 @@ SELECT emp_id,dept_name,department_id,d.dep_id,d.dep_name FROM dept d
 left join emp e on d.dep_id = e.department_id
 ```
 
-## 19 RANK, DENSE_RANK, ROW_NUMBER SQL Analytical Functions Simplified
+## 19.50 RANK, DENSE_RANK, ROW_NUMBER SQL Analytical Functions Simplified
 
 ```sql
 select * ,
@@ -135,6 +135,7 @@ from emp
 - dense rank will not skip eg 1, 1, 2, 2, 3
 - you can use partition by
 - Find Second Highest Salary by partition
+- you can add multiple order by column to break tie if same salary
 
 ```sql
 select _ from (select _,department_id as did,dense_rank() over (PARTITION by department_id order by salary desc) as rn from emp) a where rn=2

@@ -306,3 +306,120 @@ SELECT created_at,updated_at,timestampdiff(minute,created_at,updated_at) as minu
 | created_at          | updated_at          | minuteDiff | dayDiff |
 | ------------------- | ------------------- | ---------- | ------- |
 | 2024-01-01 10:00:00 | 2024-12-31 23:59:59 | 526439     | 365     |
+
+## 28 This AI is writing Mind blowing SQL Queries
+
+- top and last order count
+
+```sql
+with ordered as (SELECT *,row_number() over(order by count desc) as top_order,row_number() over(order by count asc) as lower_order FROM `order_products`) select * from ordered where top_order<3 or lower_order<3;
+```
+
+## 34 SQL Magic Show | Solving a Tricky SQL Problem with n Methods
+
+> get student who has only sql and python skill
+
+```sql
+with skillSummary as( SELECT student_id, count(*) as all_skill_count, count(case when skill in ("python","sql") then 1 else null end) as special_skill_count FROM `students` group by student_id) SELECT student_id from skillSummary where all_skill_count = 2 and special_skill_count = 2;
+```
+
+```sql
+SELECT
+    student_id,
+    COUNT(*) AS all_skill_count,
+    COUNT(
+        CASE WHEN skill IN("python", "sql") THEN 1 ELSE NULL
+    END
+) AS special_skill_count
+FROM
+    `students`
+GROUP BY
+    student_id
+HAVING
+    COUNT(*) = 2 AND COUNT(
+        CASE WHEN skill IN("python", "sql") THEN 1 ELSE NULL
+    END
+) = 2
+```
+
+```sql
+SELECT
+    student_id,
+    COUNT(*) AS all_skill_count,
+    COUNT(
+        CASE WHEN skill not IN("python", "sql") THEN 1 ELSE NULL
+    END
+) AS other_skill_count
+FROM
+    `students`
+GROUP BY
+    student_id
+HAVING
+    COUNT(*) = 2 AND COUNT(
+        CASE WHEN skill not IN("python", "sql") THEN 1 ELSE NULL
+    END
+) = 0
+```
+
+```sql
+SELECT
+    student_id,
+    COUNT(*) AS all_skill_count
+FROM
+    `students`
+where student_id not in (SELECT student_id from students where skill not in("python","sql"))
+GROUP BY
+    student_id
+having all_skill_count = 2
+```
+
+```sql
+
+SELECT
+    student_id,
+    COUNT(*) AS all_skill_count
+FROM
+    `students` as s1
+where not EXISTS (SELECT 1 from students s2 where s2.skill not in("python","sql") and s2.student_id = s1.student_id )
+GROUP BY
+    student_id
+having COUNT(*) = 2
+```
+
+```sql
+SELECT
+    student_id
+FROM
+    `students` as s1
+GROUP BY
+    student_id
+having COUNT(*) = 2
+except
+select student_id from students where skill not in ("python","sql")
+```
+
+```sql
+with skillSummary as( SELECT student_id, sum(case when skill in ("python","sql") then 1 else 5 end) as special_skill_count FROM `students` group by student_id) SELECT student_id from skillSummary where  special_skill_count = 2;
+```
+
+## 26 Delete Duplicate Record
+
+```sql
+DELETE
+FROM
+    emp4
+WHERE
+    (id, created_at) IN(
+    SELECT
+        id,
+        MIN(created_at) AS created_at
+    FROM
+        emp4
+    GROUP BY
+        id
+    HAVING
+        COUNT(*) > 1
+)
+```
+
+- you can use salary based business need

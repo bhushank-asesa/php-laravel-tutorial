@@ -217,3 +217,30 @@ SELECT salesperson_id,order_date,amount, sum(amount) over (order by order_date r
 - Various combination
   - unbound => no above limit
   - following => next one
+
+## 40 Rollup, Cube and Grouping Sets in SQL
+
+```sql
+SELECT Continent,Country,City,sum(amount) FROM orders4 GROUP BY Continent, Country, City with ROLLUP
+```
+
+- ROLLUP gives following grouping
+  - Continent, Country, City
+  - Continent, Country
+  - Continent
+
+## 35 Independent vs Correlated Subquery
+
+- Independent query
+
+```sql
+SELECT * FROM `emp` e1 inner join (select department_id,avg(salary) as depAvgSalary from emp group by department_id) d on e1.department_id = d.department_id where e1.salary > d.depAvgSalary
+```
+
+- Correlated query
+
+```sql
+ SELECT * FROM `emp` e1 where salary > (select avg(salary) from emp e2 where e2.department_id = e1.department_id)
+```
+
+- second query runs on on each first query

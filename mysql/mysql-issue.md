@@ -11,3 +11,11 @@
 ## GROUPING SETS
 
 ## Qualify
+
+## Remaining
+
+- Lead and Lag
+- 45 Accenture
+- 46 View
+- Trigger
+- 52 Median

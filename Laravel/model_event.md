@@ -20,6 +20,10 @@ protected static function booted(): void
         info('User updating - Old Values: ' . json_encode($oldValues));
         info('User updating - New Values: ' . json_encode($newValues));
         info('User updating : ' . json_encode($user));
+
+        $dirtyValues = $user->getDirty();
+        info("dirty", [$dirtyValues]);
+
     });
 }
 ```

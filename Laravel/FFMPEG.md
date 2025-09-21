@@ -4,7 +4,7 @@
 
 1. [DownLoad Link](https://www.ffmpeg.org/download.html)
 
-![image info](../ffmpeg-org-download.png)
+![image info](../assets/ffmpeg-org-download.png)
 
 2. Download [windows](https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-master-latest-win64-gpl.zip) from [Release](https://github.com/BtbN/FFmpeg-Builds/releases)
 

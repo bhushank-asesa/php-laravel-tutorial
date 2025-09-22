@@ -20,16 +20,16 @@ switch (expression) {
 
 ## Other Loop
 
-- **while** - loops through a block of code as long as the specified condition is true
-- **do...while** - loops through a block of code once, and then repeats the loop as long as the specified condition is true
-- **for** - loops through a block of code a specified number of times
-- **foreach** - loops through a block of code for each element in an array
-- **continue** statement stops the current iteration in the for loop and continue with the next.
-- **break** statement can be used to jump out of a for loop.
+* **while** - loops through a block of code as long as the specified condition is true
+* **do...while** - loops through a block of code once, and then repeats the loop as long as the specified condition is true
+* **for** - loops through a block of code a specified number of times
+* **foreach** - loops through a block of code for each element in an array
+* **continue** statement stops the current iteration in the for loop and continue with the next.
+* **break** statement can be used to jump out of a for loop.
 
 ## Functions
 
-- PHP is a Loosely Typed Language
+* PHP is a Loosely Typed Language
 
 ```php
 function addNumbers(int $a, int $b) {
@@ -40,7 +40,7 @@ echo addNumbers(5, "5 days");
 
 > since strict is NOT enabled "5 days" is changed to int(5), and it will return 10
 
-> To specify strict we need to set declare(strict_types=1);. This must be on the very first line of the PHP file.
+> To specify strict we need to set declare(strict_types=1); . This must be on the very first line of the PHP file.
 
 ```php
 declare(strict_types=1); // strict requirement
@@ -133,6 +133,24 @@ echo addNumbers(1.2, 5.2);
 | --- | ------------------------ | -------------- | -------------------------------- |
 | .   | Concatenation            | $txt1 . $txt2  | Concatenation of $txt1 and $txt2 |
 | .=  | Concatenation assignment | $txt1 .= $txt2 | Appends $txt2 to $txt1           |
+
+### Array operators
+ 
+|     |                          |                |                                  |
+|---|------------------------|--------------|-------------------------------|
+| +	|Union	|$x + $y	|Union of $x and $y	
+| ==	|Equality	|$x == $y	|Returns true if $x and $y have the same key/value pairs	
+| ===	|Identity	|$x === $y|	Returns true if $x and $y have the same key/value pairs in the same order and of the same types	
+| !=	|Inequality	|$x != $y	|Returns true if $x is not equal to $y	
+| <>	|Inequality	|$x <> $y|	Returns true if $x is not equal to $y	
+| !==	|Non-identity	|$x !== $y|	Returns true if $x is not identical to $y
+
+### Conditional operators
+ 
+|     |                          |                |                                  |
+|---|------------------------|--------------|-------------------------------|
+|?:	|Ternary	|$x = expr1 ? expr2 : expr3|	Returns the value of $x.The value of $x is expr2 if expr1 = TRUE.The value of $x is expr3 if expr1 = FALSE	
+|??|Null coalescing	|$x = expr1 ?? expr2|Returns the value of $x.The value of $x is expr1 if expr1 exists, and is not NULL.If expr1 does not exist, or is NULL, the value of $x is expr2.Introduced in PHP 7 
 
 ## Foreach with & iteration
 
